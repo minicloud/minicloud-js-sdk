@@ -25,4 +25,9 @@ describe('member.js', function() {
         data.name.should.equal(global.userName)
         done()
     })
+    it('members/reset_password', function*(done) {
+        var data = yield Member.resetPassword('123456','1234567')
+        data.status.should.equal(200)
+        done()
+    })
 })
