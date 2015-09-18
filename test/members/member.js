@@ -26,7 +26,7 @@ describe('member.js', function() {
         done()
     })
     it('members/reset_password', function*(done) {
-        var data = yield Member.resetPassword('123456','1234567')
+        var data = yield Member.resetPassword('admin','admin')
         data.status.should.equal(200)
         done()
     })

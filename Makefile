@@ -14,7 +14,8 @@ endif
 
 REQUIRED = --require should --require should-http --require co-mocha
 
-TESTS = test/members
+TESTS = test/members\
+        test/departments
 		
 test:
 	@NODE_ENV=test  $(BIN) $(FLAGS)  \
