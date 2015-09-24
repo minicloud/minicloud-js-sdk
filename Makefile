@@ -20,7 +20,8 @@ TESTS = test/members\
         test/events\
         test/files\
         test/groups\
-        test/tags
+        test/tags\
+        test/members-console
 		
 test:
 	@NODE_ENV=test  $(BIN)   \
