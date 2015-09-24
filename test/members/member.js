@@ -17,6 +17,8 @@ describe('member.js', function() {
         data = yield Member.register(name, '123456')
         data.status.should.equal(409)
         data.error.should.equal('member_existed')
+        data = yield Member.register()
+        data.status.should.equal(400)
         done()
     })
     it('members/get_my_account', function*(done) {
@@ -26,8 +28,35 @@ describe('member.js', function() {
         done()
     })
     it('members/reset_password', function*(done) {
-        var data = yield Member.resetPassword('admin','admin')
+        var data = yield Member.resetPassword('admin', 'admin')
         data.status.should.equal(200)
+        var data = yield Member.resetPassword()
+        data.status.should.equal(400)
+        var data = yield Member.resetPassword('adminaaa', 'admin')
+        data.status.should.equal(409)
         done()
     })
+    it('members/list', function*(done) {
+        var data = yield Member.list(100, 'abcd')
+        data.status.should.equal(200)
+        var data = yield Member.list('aa10', 'abccd')
+        data.status.should.equal(400)
+        done()
+    })
+    it('members/search', function*(done) {
+        var data = yield Member.search('adm', 100, 'abcd')
+        data.status.should.equal(200)
+        var data = yield Member.search()
+        data.status.should.equal(400)
+        done()
+    })
+    it('members/set_profile', function*(done) {
+        var data = yield Member.setProfile('admin', 'jim@minicloud.io', '/images/jim-avatar.png')
+        data.status.should.equal(200)
+        var data = yield Member.setProfile('admin', 'jimminicloud.io', '/images/jim-avatar.png')
+        data.status.should.equal(400)
+        done()
+    })
+
+
 })

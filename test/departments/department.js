@@ -10,7 +10,7 @@ describe('department.js', function() {
         return done()
     })
     it('department/add', function*(done) { 
-        var data = yield Department.add('/minicloud_inc/R&D/chengdu_office')
+        var data = yield Department.add('/minicloud_inc/R&D/chengdu_offce'+Math.random())
         data.status.should.equal(200) 
         done()
     })
