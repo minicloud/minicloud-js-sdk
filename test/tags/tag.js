@@ -49,7 +49,6 @@ describe('tag.js', function() {
     })
  it('tag/files', function*(done) {
         var data = yield Tag.getFileList('green')
-        console.log(data)
         data.status.should.equal(200)
         var data = yield Tag.getFileList()
         data.status.should.equal(400)
