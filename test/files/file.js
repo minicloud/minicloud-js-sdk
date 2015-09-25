@@ -66,7 +66,25 @@ describe('file.js', function() {
         done()
     })
 
-
-
+it('file/list_revision', function*(done) {
+        var data = yield File.listRevision('/home/test-files/lt-1k.js')
+        data.status.should.equal(200)
+        var data = yield File.listRevision()
+        data.status.should.equal(400)
+        var data = yield File.listRevision('/home/test-files/lt-1k11111.js')
+        data.status.should.equal(409)
+        done()
+    })
+it('file/restore', function*(done) {
+        var data = yield File.restore('/home/test-files/lt-1k.js', '47618d22b1830e42684579364e62f89000237433')
+        data.status.should.equal(200)
+        var data = yield File.restore()
+        data.status.should.equal(400)
+        var data = yield File.restore('/home/test-files/lt111.js','47618d22b1830e42684579364e62f89000237433')
+        data.status.should.equal(409)
+        var data = yield File.restore('/home/test-files/lt-1k.js','57618d22b1830e42684579364e62f89000237432')
+        data.status.should.equal(409)
+        done()
+    })
 
 })
