@@ -3,13 +3,13 @@ var assert = require('assert')
 describe('department.js', function() {
     this.timeout(global.timeout)
     var Department = null
-    var Member = null
+    var User = null
     var time = null
     before(function*(done) {
         yield context.init()
         var Client = require('../../lib')
         Department = new Client.Department()
-        Member = new Client.Member()
+        User = new Client.User()
         return done()
     })
     it('department/add', function*(done) {
@@ -18,8 +18,8 @@ describe('department.js', function() {
         data.status.should.equal(200)
         var data2 = yield Department.add('/minicloud_inc/aaa'+time)
         data2.status.should.equal(409)
-        var user = yield Member.getMyAccount()
-        yield Department.membersAdd('/minicloud_inc/aaa'+time,user.uuid)
+        var user = yield User.getMyAccount()
+        yield Department.usersAdd('/minicloud_inc/aaa'+time,user.uuid)
         yield Department.add('/minicloud_inc/bbb'+time)
         yield Department.add('/minicloud_inc/ccc'+time)
         done()
@@ -29,33 +29,33 @@ describe('department.js', function() {
         data.status.should.equal(200)
         done()
     })
-    it('department/members', function*(done) {
-        var data = yield Department.members('/minicloud_inc/aaa'+time)
+    it('department/users', function*(done) {
+        var data = yield Department.users('/minicloud_inc/aaa'+time)
         data.status.should.equal(200)
-        var data = yield Department.members('/minicloud_cni/'+time)
+        var data = yield Department.users('/minicloud_cni/'+time)
         data.status.should.equal(409)
-        var data = yield Department.members()
+        var data = yield Department.users()
         data.status.should.equal(400)
         done()
     })
-    it('department/members/import', function*(done) {
-        var data = yield Department.import([{"department-member":"/minicloud_inc222/market222"},{"department-member":"/minicloud_inc222/R&D222/office222"}])
+    it('department/users/import', function*(done) {
+        var data = yield Department.import([{"department-user":"/minicloud_inc222/market222"},{"department-user":"/minicloud_inc222/R&D222/office222"}])
         done()
     })
-    it('department/members/remove', function*(done) {
-        var user = yield Member.getMyAccount()
-        var data = yield Department.membersRemove('/minicloud_inc/aaa'+time,user.uuid)
+    it('department/users/remove', function*(done) {
+        var user = yield User.getMyAccount()
+        var data = yield Department.usersRemove('/minicloud_inc/aaa'+time,user.uuid)
         data.status.should.equal(200)
         done()
     })
-    it('department/members/add', function*(done) {
-        var user = yield Member.getMyAccount()
-        var data = yield Department.membersAdd('/minicloud_inc/aaa'+time,user.uuid)
+    it('department/users/add', function*(done) {
+        var user = yield User.getMyAccount()
+        var data = yield Department.usersAdd('/minicloud_inc/aaa'+time,user.uuid)
         global.departmentPath = '/minicloud_inc/aaa'+time
         data.status.should.equal(200)
-        var data = yield Department.membersAdd('/minicloud_incxxx/aaa'+time,user.uuid)//depart not exits
+        var data = yield Department.usersAdd('/minicloud_incxxx/aaa'+time,user.uuid)//depart not exits
         data.status.should.equal(409)
-        var data = yield Department.membersAdd('/minicloud_incxxx/aaa'+time,'xxx')//member not exits
+        var data = yield Department.usersAdd('/minicloud_incxxx/aaa'+time,'xxx')//user not exits
         data.status.should.equal(409)
         done()
     })

@@ -1,0 +1,62 @@
+var context = require('../context')
+var assert = require('assert')
+var uuid = require('uuid')
+describe('user.js', function() {
+    this.timeout(global.timeout)
+    var User = null
+    before(function*(done) {
+        yield context.init()
+        var Client = require('../../lib')
+        User = new Client.User()
+        return done()
+    })
+    it('users/register', function*(done) {
+        var name = uuid.v4()
+        var data = yield User.register(name, '123456')
+        data.status.should.equal(200)
+        data = yield User.register(name, '123456')
+        data.status.should.equal(409)
+        data.error.should.equal('user_existed')
+        data = yield User.register()
+        data.status.should.equal(400)
+        done()
+    })
+    it('users/get_my_account', function*(done) {
+        var data = yield User.getMyAccount()
+        data.status.should.equal(200)
+        data.name.should.equal(global.userName)
+        done()
+    })
+    it('users/reset_password', function*(done) {
+        var data = yield User.resetPassword('admin', 'admin')
+        data.status.should.equal(200)
+        var data = yield User.resetPassword()
+        data.status.should.equal(400)
+        var data = yield User.resetPassword('adminaaa', 'admin')
+        data.status.should.equal(409)
+        done()
+    })
+    it('users/list', function*(done) {
+        var data = yield User.list(100, 'abcd')
+        data.status.should.equal(200)
+        var data = yield User.list('aa10', 'abccd')
+        data.status.should.equal(400)
+        done()
+    })
+    it('users/search', function*(done) {
+        var data = yield User.search('adm', 100, 'abcd')
+        data.status.should.equal(200)
+        var data = yield User.search()
+        data.status.should.equal(400)
+        done()
+    })
+    it('users/set_profile', function*(done) {
+        var data = yield User.setProfile('admin', 'jim@minicloud.io', '/images/jim-avatar.png')
+        data.status.should.equal(200)
+        var data = yield User.setProfile('admin', 'jimminicloud.io', '/images/jim-avatar.png')
+        data.status.should.equal(400)
+        done()
+    })
+
+
+})

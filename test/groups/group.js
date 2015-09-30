@@ -3,12 +3,12 @@ var assert = require('assert')
 describe('group.js', function() {
     this.timeout(global.timeout)
     var Group = null
-    var Member = null
+    var User = null
     before(function*(done) {
         yield context.init()
         var Client = require('../../lib')
         Group = new Client.Group()
-        Member = new Client.Member()
+        User = new Client.User()
         return done()
     })
     it('group/add', function*(done) {
@@ -26,24 +26,24 @@ describe('group.js', function() {
         data.status.should.equal(200)
         done()
     })
-    it('group/members/add', function*(done) {
-        var data1 = yield Member.getMyAccount()
-        var data = yield Group.addMember('develop', data1.uuid)
+    it('group/users/add', function*(done) {
+        var data1 = yield User.getMyAccount()
+        var data = yield Group.addUser('develop', data1.uuid)
         data.status.should.equal(200)
-        var data = yield Group.addMember()
+        var data = yield Group.addUser()
         data.status.should.equal(400)
-        var data = yield Group.addMember('develop123aaa', data1.uuid)
+        var data = yield Group.addUser('develop123aaa', data1.uuid)
         data.error.should.equal('group_not_exist')
-        var data = yield Group.addMember('develop', '1223')
-        data.error.should.equal('member_not_exist')
+        var data = yield Group.addUser('develop', '1223')
+        data.error.should.equal('user_not_exist')
         done()
     })
-    it('group/members', function*(done) {
-        var data = yield Group.getMemberList('develop')
+    it('group/users', function*(done) {
+        var data = yield Group.getUserList('develop')
         data.status.should.equal(200)
-        var data = yield Group.getMemberList()
+        var data = yield Group.getUserList()
         data.status.should.equal(400)
-        var data = yield Group.getMemberList('develop123ewq')
+        var data = yield Group.getUserList('develop123ewq')
         data.status.should.equal(409)
         done()
     })
@@ -59,16 +59,16 @@ describe('group.js', function() {
         done()
     })
 
- it('group/members/remove', function*(done) {
-        var data1 = yield Member.getMyAccount()
-        var data = yield Group.removeMember('develop', data1.uuid)
+ it('group/users/remove', function*(done) {
+        var data1 = yield User.getMyAccount()
+        var data = yield Group.removeUser('develop', data1.uuid)
         data.status.should.equal(200)
-        var data = yield Group.removeMember()
+        var data = yield Group.removeUser()
         data.status.should.equal(400)
-        var data = yield Group.removeMember('develop123aaa', data1.uuid)
+        var data = yield Group.removeUser('develop123aaa', data1.uuid)
         data.error.should.equal('group_not_exist')
-        var data = yield Group.removeMember('develop123aaa', '1223')
-        data.error.should.equal('member_not_exist')
+        var data = yield Group.removeUser('develop123aaa', '1223')
+        data.error.should.equal('user_not_exist')
         done()
     })
    it('group/remove', function*(done) {

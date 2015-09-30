@@ -1,9 +1,9 @@
-  [![build status][travis-image]][travis-url]
   [![Test coverage][coveralls-image]][coveralls-url]
   [![devDependency Status](https://david-dm.org/atom/electron/dev-status.svg)](https://david-dm.org/minicloud/minicloud-js-sdk#info=devDependencies)
 
 # minicloud-js-sdk
-minicloud js sdk for node/browser
+
+minicloud js sdk for node/browser.compatible [browserify](https://www.npmjs.com/package/browserify),support:ie10+,chrome,firefox
 
 
 [travis-image]: https://img.shields.io/travis/minicloud/minicloud-js-sdk/master.svg?style=flat-square

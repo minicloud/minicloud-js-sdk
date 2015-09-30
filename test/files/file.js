@@ -3,13 +3,13 @@ var assert = require('assert')
 describe('file.js', function() {
     this.timeout(global.timeout)
     var Group = null
-    var Member = null
+    var User = null
     var File = null
     before(function*(done) {
         yield context.init()
         var Client = require('../../lib')
         File = new Client.File()
-        Member = new Client.Member()
+        User = new Client.User()
         return done()
     })
     it('file/create_folder', function*(done) {
