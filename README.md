@@ -1,4 +1,3 @@
-  [![Test coverage][coveralls-image]][coveralls-url]
   [![devDependency Status](https://david-dm.org/atom/electron/dev-status.svg)](https://david-dm.org/minicloud/minicloud-js-sdk#info=devDependencies)
 
 # minicloud-js-sdk
