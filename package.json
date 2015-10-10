@@ -1,6 +1,6 @@
 {
   "name": "minicloud-js-sdk",
-  "version": "0.0.5",
+  "version": "0.0.10",
   "description": "minicloud js sdk", 
   "scripts": {
     "test": "make test"
@@ -34,6 +34,7 @@
     "iojs": ">= 1.0.0"
   },
   "files": [
-    "lib"
+    "lib",
+    "index.js"
   ]
 }
