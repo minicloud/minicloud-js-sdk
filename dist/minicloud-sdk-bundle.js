@@ -116,7 +116,7 @@ ClientSimpleFileUpload.prototype._upload = function*(done) {
                 self.hash = body.hash
                 self.size = body.size
                     //upload finish
-                co.wrap(function*() {
+                co.wrap(function() {
                     var body = yield self._finish()
                     done(null, body)
                 })()
@@ -131,7 +131,7 @@ ClientSimpleFileUpload.prototype._upload = function*(done) {
 ClientSimpleFileUpload.prototype.run = function() {
     var self = this
     return function(done) {
-        co.wrap(function*() {
+        co.wrap(function() {
             //get current file infomation
             yield self._getLocalPathInfo()
                 //hash upload 
