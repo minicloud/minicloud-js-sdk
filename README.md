@@ -4,6 +4,9 @@
 
 minicloud js sdk for node/browser.compatible [browserify](https://www.npmjs.com/package/browserify),support:ie10+,chrome,firefox
 
+## bower
+
+bower install minicloud-js-sdk --save
 
 [travis-image]: https://img.shields.io/travis/minicloud/minicloud-js-sdk/master.svg?style=flat-square
 [travis-url]: https://travis-ci.org/minicloud/minicloud-js-sdk 

@@ -1,0 +1,20 @@
+{
+  "name": "minicloud-js-sdk",
+  "version": "0.0.10",
+  "homepage": "https://github.com/minicloud/minicloud-js-sdk",
+  "authors": [
+    "minicloudjs.com"
+  ],
+  "description": "minicloud js sdk for node/browser",
+  "main": "dist/minicloud-sdk-bundle.js",
+  "keywords": ["minicloud", "sdk"],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
+
